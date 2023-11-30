@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 export default function Home() {
-  const redirectToGoogleOAuthServer = () => {
+  const getGoogleLoginScreenUrl = () => {
     const url = "https://accounts.google.com/o/oauth2/v2/auth";
     const query = {
       client_id: import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID,
@@ -17,12 +17,12 @@ export default function Home() {
     return `${url}?${queryString}`;
   };
 
-  const googleOauthRedirectUrl = redirectToGoogleOAuthServer();
+  const googleLoginScreenUrl = getGoogleLoginScreenUrl();
 
   return (
     <div>
       <h1>Homepage</h1>
-      <Link to={googleOauthRedirectUrl}>Login with Google</Link>
+      <Link to={googleLoginScreenUrl}>Login with Google</Link>
     </div>
   );
 }
