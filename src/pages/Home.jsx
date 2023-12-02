@@ -16,13 +16,33 @@ export default function Home() {
     const queryString = new URLSearchParams(query).toString();
     return `${url}?${queryString}`;
   };
-
+  const isLoggedIn = localStorage.getItem("access_token");
   const googleLoginScreenUrl = getGoogleLoginScreenUrl();
 
   return (
     <div>
       <h1>Homepage</h1>
-      <Link to={googleLoginScreenUrl}>Login with Google</Link>
+      {isLoggedIn ? (
+        <button
+          style={{
+            width: "100px",
+            height: "50px",
+            backgroundColor: "#2c2c2c",
+            color: "#fff",
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            localStorage.removeItem("access_token");
+            localStorage.removeItem("refresh_token");
+            localStorage.removeItem("new_user");
+            window.location.reload();
+          }}
+        >
+          Logout
+        </button>
+      ) : (
+        <Link to={googleLoginScreenUrl}>Login with Google</Link>
+      )}
     </div>
   );
 }
