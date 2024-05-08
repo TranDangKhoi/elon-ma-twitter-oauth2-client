@@ -11,14 +11,15 @@ export default function Home() {
         "https://www.googleapis.com/auth/userinfo.profile",
         "https://www.googleapis.com/auth/userinfo.email",
       ].join(" "),
-      // prompt: "consent",
+      prompt: "consent",
+      // Lấy thêm refresh token
+      access_type: "offline",
     };
     const queryString = new URLSearchParams(query).toString();
     return `${url}?${queryString}`;
   };
   const isLoggedIn = localStorage.getItem("access_token");
   const googleLoginScreenUrl = getGoogleLoginScreenUrl();
-
   return (
     <div>
       <h1>Homepage</h1>
